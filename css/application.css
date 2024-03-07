@@ -1,0 +1,201 @@
+html, body {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  overflow: hidden;
+}
+
+.calcite-theme-light,
+.calcite-theme-dark {
+  --calcite-ui-info: #f07062;;
+  --calcite-ui-brand: #d83020;
+  --calcite-ui-brand-hover: #f2877b;
+  --calcite-ui-brand-press: #e65240;
+}
+
+/*.esri-widget,
+.esri-widget__heading,
+.esri-widget--button,
+.esri-menu,
+.esri-popup__button,
+.esri-popup__main-container,
+.esri-popup__header-container--button:hover,
+.esri-popup__pointer-direction,
+.esri-button {
+  background-color: var(--calcite-ui-foreground-1) !important;
+  color: var(--calcite-ui-text-2) !important;
+}*/
+
+/*.esri-legend {
+  width: unset !important;
+}*/
+
+.toggle-panel[hidden] {
+  display: none;
+}
+
+header[slot="header"] {
+  z-index: 99;
+  padding: 0 1rem 0 1rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.application-title {
+  color: var(--calcite-ui-brand);
+}
+
+calcite-loader#app-loader {
+  align-self: center;
+  justify-self: center;
+}
+
+.esri-ui-corner calcite-loader {
+  pointer-events: none;
+  padding: 0;
+  right: 15px;
+}
+
+
+calcite-panel > div[slot="header-actions-end"] {
+  display: inline-flex;
+}
+
+calcite-notice {
+  z-index: 101;
+}
+
+#center-container {
+  flex-grow: 1;
+  flex-shrink: 1;
+  min-width: 0;
+  min-height: 0;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#view-container {
+  flex-grow: 1;
+  flex-shrink: 1;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+#bottom-container {
+  height: 100%;
+}
+
+#selected-panel {
+  z-index: 98;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+#selected-panel calcite-label {
+  flex-grow: 1;
+  flex-shrink: 1;
+  min-width: 0;
+  min-height: 0;
+}
+
+#selected-panel calcite-input {
+  /*margin: 2px 5px;*/
+  flex-grow: 1;
+  flex-shrink: 1;
+  min-width: 0;
+  min-height: 0;
+}
+
+#acs-tabs-container {
+  flex-grow: 1;
+  flex-shrink: 1;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+#acs-tabs {
+  overflow: hidden;
+  flex-grow: 1;
+  flex-shrink: 1;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+#acs-tab-nav {
+  padding: 5px 0;
+  min-height: max-content;
+}
+
+#acs-tabs-content {
+  flex-grow: 1;
+  flex-shrink: 1;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+calcite-tile-select-group {
+  padding: 1px;
+}
+
+#acs-tabs calcite-tab {
+  padding: 0;
+  flex-grow: 1;
+  flex-shrink: 1;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+#acs-tabs calcite-tab:not([active]) {
+  display: none;
+}
+
+calcite-tile {
+  overflow: auto;
+}
+
+.tile-filter {
+  position: sticky;
+  top: 0;
+  z-index: 99;
+  padding: 5px;
+  background-color: var(--calcite-ui-foreground-1);
+  margin-bottom: 2px;
+}
+
+.stat-node {
+  font-size: 31pt;
+  flex-grow: 1;
+  flex-shrink: 1;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+#cv-chart-node-container {
+  pointer-events: none;
+  position: relative;
+  width: auto !important;
+  height: 180px !important;
+}
+
+#acs-field-select{
+  display: flex;
+  flex-direction: column
+}

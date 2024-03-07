@@ -1,0 +1,207 @@
+/*let description = acsLayerField.description;
+const no_spaces_formula = new RegExp(/(E\/B)|(E\+B)/g);
+if(no_spaces_formula.test(description)){
+description = description.replace(/(E\/B)/g, 'E / B').replace(/(E\+B)/g, 'E + B');
+console.info(acsLayerField.description, description);
+}*/
+
+/*colorAndSizeRendererCreator.createContinuousRenderer({
+ view: view,
+ layer: acsLayer,
+ field: acsField.name,
+ theme: theme,
+ sizeOptions: {
+ sizeScheme: {
+ minSize: 5,
+ maxSize: 15
+ }
+ },
+ colorOptions: {
+ //isContinuous: true,
+ colorScheme: matchingColorScheme
+ }
+ }).then((rendererResult) => {
+ acsLayer.renderer = rendererResult.renderer;
+ });*/
+
+/*switch (renderer.type) {
+ case 'unique-value':
+
+ colorAndSizeRendererCreator.createContinuousRenderer({
+ view: view,
+ layer: acsLayer,
+ field: acsField.name,
+ theme: theme,
+ colorOptions: {
+ colorScheme: matchingColorScheme
+ }
+ }).then((rendererResult) => {
+ acsLayer.renderer = rendererResult.renderer;
+ });
+
+ break;
+
+ case 'class-breaks':
+ console.info('class-breaks', renderer.classBreakInfos.length);
+
+ default:*/
+
+//const sizeVV = renderer.visualVariables.find(vv => vv.type === 'size');
+//const colorVV = renderer.visualVariables.find(vv => vv.type === 'color');
+
+/*colorAndSizeRendererCreator.createVisualVariables({
+ view: view,
+ layer: acsLayer,
+ field: acsField.name,
+ theme: theme,
+ colorOptions: {
+ colorScheme: matchingColorScheme
+ }
+ }).then((createVVResponse) => {
+ renderer.set({
+ visualVariables: [
+ createVVResponse.color.visualVariable,
+ ...createVVResponse.size.visualVariables
+ ]
+ });
+ acsLayer.renderer = renderer;
+ });*/
+
+/*       break;
+ }*/
+
+/*const excludeRendererTypes = ['unique-value'];
+ const hasValidRenderer = !excludeRendererTypes.includes(acsLayer.renderer.type);
+
+ const sizeVV = renderer.visualVariables.find(vv => vv.type === 'size');
+ const colorVV = renderer.visualVariables.find(vv => vv.type === 'color');
+
+ if (colorVV) {
+ const colors = colorVV.stops.map(stop => stop.color);
+
+ colorRendererCreator.createVisualVariable({
+ view: view,
+ layer: acsLayer,
+ field: acsField.name,
+ theme: colorTheme,
+ colorScheme: matchingColorScheme
+ }).then((createVVResponse) => {
+
+ renderer.set({
+ field: acsField.name,
+ visualVariables: [createVVResponse.visualVariable, sizeVV]
+ });
+
+ acsLayer.renderer = renderer;
+
+ });
+
+ } else {
+ console.warn(`[ Can't apply SmartMapping; missing color VV ][ ${ acsLayer.portalItem.id } ][ ${ acsLayer.portalItem.title } ][ ${ acsField.name } ]`);
+ }
+ */
+
+// const _getColorVV = (visualVariables) => {
+//   return visualVariables.find(vv => vv.type === 'color');
+// };
+//let colorVV = _getColorVV(renderer.visualVariables) || _getColorVV(renderer.authoringInfo.visualVariables);
+//let colors = colorVV?.stops?.map(stop => stop.color) || colorRamps.byName('Blue and Red 8').colors;
+//let colors = colorRamps.byName('Blue and Red 8').colors;
+
+==================================================================================
+
+
+ACS Race and Hispanic Origin Variables
+
+
+==================================================================================
+
+
+/*let validFields;
+const _NEXT_FIELD = () => {
+const validField = validFields.shift();
+if (validField) {
+
+const nextFieldTile = acsFieldList.querySelector(`calcite-tile-select[value="${ validField.name }"]`);
+nextFieldTile.toggleAttribute('checked', true);
+nextFieldTile.scrollIntoView({behavior: 'smooth', block: 'center', inline: 'center'});
+acsFieldTileSelected(validField);
+
+this._watchUtils.whenNotOnce(view, 'updating', () => {
+setTimeout(_NEXT_FIELD, 1000);
+});
+} else {
+this._watchUtils.whenNotOnce(view, 'updating', () => {
+setTimeout(_NEXT_LAYER, 1000);
+});
+}
+};
+
+const acsLayerItemsIds = acsLayerItems.map(layerItem => layerItem.id);
+const _NEXT_LAYER = () => {
+const acsLayerItemsId = acsLayerItemsIds.shift();
+if (acsLayerItemsId) {
+
+const nextLayerTile = acsLayerList.querySelector(`calcite-tile-select[value="${ acsLayerItemsId }"]`);
+nextLayerTile.toggleAttribute('checked');
+nextLayerTile.scrollIntoView({behavior: 'smooth', block: 'center', inline: 'center'});
+
+layerTileSelected(acsLayerItemsId).then((statisticFields) => {
+validFields = [...statisticFields];
+
+this._watchUtils.whenNotOnce(view, 'updating', () => {
+setTimeout(_NEXT_FIELD, 1000);
+});
+}).catch(() => {
+console.warn(`Can't auto-select layer tile`);
+});
+}
+};
+
+if (this._test_ === 'true') {
+_NEXT_LAYER();
+} else {
+// SELECT INITIAL LAYER ITEM //
+selectInitialLayerItem();
+}*/
+
+
+/*view.map.basemap.load().then(() => {
+const basemapToggle = new BasemapToggle({
+view: view,
+nextBasemap: {
+portalItem: {id: "4f2e99ba65e34bb8af49733d9778fb8e"}
+}
+});
+view.ui.add(basemapToggle, {position: 'top-left', index: 0});
+
+//
+// https://codepen.io/odoe/pen/qBPaPpR
+//
+// ESRI STYLE LINK //
+const sheet = document.getElementById("esriStyle");
+// ESRI VIEW UI //
+// - ASSUMES ONLY ONE VIEW IN THIS APP... //
+const esriUI = document.querySelector('.esri-ui');
+
+basemapToggle.when(() => {
+this._watchUtils.init(basemapToggle, 'activeBasemap', activeBasemap => {
+switch (activeBasemap.title) {
+case 'Human Geography Map':
+document.body.classList.add('calcite-theme-light');
+document.body.classList.remove('calcite-theme-dark');
+esriUI.classList.add('calcite-theme-light');
+esriUI.classList.remove('calcite-theme-dark');
+sheet.href = "https://js.arcgis.com/4.23/esri/themes/light/main.css";
+break;
+case 'Human Geography Dark Map':
+document.body.classList.add('calcite-theme-dark');
+document.body.classList.remove('calcite-theme-light');
+esriUI.classList.add('calcite-theme-dark');
+esriUI.classList.remove('calcite-theme-light');
+sheet.href = "https://js.arcgis.com/4.23/esri/themes/dark/main.css";
+break;
+}
+});
+});
+});*/

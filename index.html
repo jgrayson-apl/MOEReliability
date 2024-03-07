@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0 maximum-scale=1.0"/>
+    <!-- META -->
+    <!--<meta property="og:title" content="">-->
+    <!--<meta property="og:description" content="">-->
+    <!--<meta property="og:image" content="https://geoxc-apps.bd.esri.com/assets/GeoXC.png">-->
+    <!--<meta property="og:url" content="https://geoxc-apps.bd.esri.com/.../index.html">-->
+    <!-- ICON -->
+    <link rel="icon" href="./assets/favicon.ico" sizes="32x32" type="image/vnd.microsoft.icon">
+    <!-- TITLE -->
+    <title class="application-title"></title>
+    
+    <!-- CHARTJS -->
+    <script src="https://unpkg.com/chart.js@2.8.0/dist/Chart.bundle.js"></script>
+    <script src="https://unpkg.com/chartjs-gauge@0.3.0/dist/chartjs-gauge.js"></script>
+    <script src="https://unpkg.com/chartjs-plugin-datalabels@0.7.0/dist/chartjs-plugin-datalabels.js"></script>
+    
+    <!-- CALCITE -->
+    <script src="https://js.arcgis.com/calcite-components/1.0.0-beta.86/calcite.esm.js" type="module"></script>
+    <link href="https://js.arcgis.com/calcite-components/1.0.0-beta.86/calcite.css" rel="stylesheet"/>
+    
+    <!-- ArcGIS API for JavaScript-->
+    <link id="esriStyle" href="https://js.arcgis.com/4.24/esri/themes/light/main.css" rel="stylesheet"/>
+    <script src="https://js.arcgis.com/4.24/"></script>
+    
+    <!-- APPLICATION -->
+    <link rel="stylesheet" type="text/css" href="./css/app-base.css"/>
+    <link rel="stylesheet" type="text/css" href="./css/application.css">
+    <script type="module" src="./js/Application.js"></script>
+  </head>
+  <body class="calcite-theme-light">
+    
+    <calcite-shell dir="ltr">
+      
+      <header class="content-row" slot="header">
+        <h2 class="application-title"></h2>
+        
+        <div class="content-row">
+          
+          <calcite-action-bar class="content-row" expand-disabled="true">
+            <calcite-action id="app-share-action" appearance="clear" scale="m" title="share current options..." text="share current options" icon="link"></calcite-action>
+            <calcite-action id="app-details-action" appearance="clear" scale="m" title="app details..." text="app details" icon="information"></calcite-action>
+          </calcite-action-bar>
+          
+          <calcite-alert id="app-share-alert" icon="" auto-dismiss="" auto-dismiss-duration="medium" scale="m" color="green" aria-hidden="true" role="alert">
+            <div slot="message">Shareable link has been copied to the clipboard.</div>
+            <calcite-link id="app-share-link" slot="link" href="#" target="_blank" role="link" title="open in new tab">open in new tab</calcite-link>
+          </calcite-alert>
+        
+        </div>
+      </header>
+      
+      <!-- LEFT -->
+      <calcite-shell-panel slot="primary-panel" position="start" width-scale="m" collapsed="false">
+        
+        <calcite-action-bar id="side-panel-action-bar" slot="action-bar">
+          <calcite-action text="ACS Layers" title="ACS layers..." icon="layers" class="toggle-action" data-toggle="acs-layers-list" active></calcite-action>
+          <calcite-action text="Places" title="Places..." icon="bookmark" class="toggle-action" data-toggle="bookmarks"></calcite-action>
+        </calcite-action-bar>
+        
+        <calcite-panel heading="Places" class="toggle-panel" data-toggle="bookmarks" hidden>
+          <div slot="header-actions-end">
+            <calcite-action icon="x" title="close panel" class="toggle-close" data-toggle="bookmarks"></calcite-action>
+          </div>
+          <div id="bookmarks-container"></div>
+        </calcite-panel>
+        
+        <calcite-panel heading="American Community Survey" summary="Current 5-year Estimates" id="acs-layers-panel" class="toggle-panel" data-toggle="acs-layers-list">
+          <calcite-action slot="header-actions-start" icon="launch" hidden>
+            <calcite-link href="https://esri.maps.arcgis.com/home/group.html?id=16b3a5ac36834ed6b3f16261d9a988ea"></calcite-link>
+          </calcite-action>
+          <div slot="header-actions-end">
+            <calcite-action class="toggle-close" data-toggle="acs-layers-list" icon="x" title="close panel"></calcite-action>
+          </div>
+          <calcite-tabs id="acs-tabs" layout="center" position="above">
+            <calcite-tab-nav id="acs-tab-nav" layout="center" slot="tab-nav">
+              <calcite-tab-title icon-start="layer-points" id="acs-layer-tab-title" title="Centroids Layers" tab="acs-layer" active>Layers</calcite-tab-title>
+              <calcite-tab-title icon-start="form-elements" id="acs-field-tab-title" title="Statistics Field" tab="acs-field">Fields</calcite-tab-title>
+            </calcite-tab-nav>
+            <div id="acs-tabs-content">
+              
+              <div class="tile-filter">
+                <calcite-input id="tile-layer-search-input" clearable autofocus type="search" icon="layer-filter" placeholder="filter layers"></calcite-input>
+                <calcite-input id="tile-field-search-input" clearable autofocus type="search" icon="selected-items-filter" placeholder="filter fields" hidden>
+                  <calcite-action slot="action" hidden></calcite-action>
+                  <calcite-action id="field-sort-alpha" slot="action" icon="a-z-down" scale="s" title="alphabetical sort order" active></calcite-action>
+                  <calcite-action id="field-sort-table" slot="action" icon="table" scale="s" title="table sort order"></calcite-action>
+                </calcite-input>
+              </div>
+              
+              <calcite-tab tab="acs-layer" active>
+                <calcite-tile-select-group id="acs-layer-select" layout="vertical"></calcite-tile-select-group>
+              </calcite-tab>
+              <calcite-tab tab="acs-field">
+                <calcite-tile-select-group id="acs-field-select" layout="vertical"></calcite-tile-select-group>
+              </calcite-tab>
+            
+            </div>
+          </calcite-tabs>
+        </calcite-panel>
+      
+      </calcite-shell-panel>
+      
+      <!-- CENTER -->
+      <div id="center-container" class="content-col content-fill">
+        
+        <div id="selected-panel" class="panel-content content-row panel-no-margin panel-no-border">
+          
+          <calcite-action id="selected-centroid-layer-link" icon="launch" title="View full details about this layer..." scale="s" disabled></calcite-action>
+          
+          <calcite-label layout="inline" disable-spacing>
+            <div>Layer&nbsp;</div>
+            <calcite-input id="selected-centroid-layer-input" icon="layer-points" read-only status="invalid" placeholder="centroid layer" type="text" value=""></calcite-input>
+          </calcite-label>
+          
+          <calcite-label layout="inline-space-between" disable-spacing>
+            <div>&nbsp;Field&nbsp;</div>
+            <calcite-input id="selected-count-field-input" icon="form-elements" read-only status="invalid" placeholder="statistic field" type="text" value=""></calcite-input>
+          </calcite-label>
+          
+          <calcite-action id="report-issue-link" icon="exclamation-mark-circle" title="Report issue with the field in this layer..." scale="s" disabled hidden></calcite-action>
+        
+        </div>
+        
+        <div id="view-container">
+          <calcite-loader id="view-updating" type="indeterminate" scale="s"></calcite-loader>
+        </div>
+      
+      </div>
+      
+      <!-- RIGHT -->
+      <calcite-shell-panel slot="contextual-panel" position="end" width-scale="s" collapsed="false">
+        
+        <calcite-panel heading="Summary Stats with MOE">
+          
+          <calcite-card>
+            <div slot="title">Reliability</div>
+            <div slot="subtitle">Coefficient of Variation</div>
+            <div id="cv-chart-node-container">
+              <canvas id="cv-chart-node"></canvas>
+            </div>
+          </calcite-card>
+          
+          <calcite-card>
+            <div slot="title">Number of Census Tracts</div>
+            <div class="stat-node" data-stat="count">--</div>
+          </calcite-card>
+          
+          <calcite-card class="stat-card" data-type="count-or-amount">
+            <div slot="title">Sum of All Values</div>
+            <div class="stat-node" data-stat="count-sum">--</div>
+          </calcite-card>
+          
+          <calcite-card class="stat-card" data-type="count-or-amount">
+            <div slot="title">Margin of Error</div>
+            <div slot="subtitle">of sums of all values</div>
+            <div class="stat-node" data-stat="count-sum-moe">--</div>
+          </calcite-card>
+          
+          <calcite-card class="stat-card" data-type="percentage-or-ratio" hidden>
+            <div slot="title">Percentages and Rates</div>
+            <div class="stat-node" data-stat="pct-sum">--</div>
+          </calcite-card>
+          
+          <calcite-card class="stat-card" data-type="percentage-or-ratio" hidden>
+            <div slot="title">Margin of Error</div>
+            <div slot="subtitle">of percentages and rates</div>
+            <div class="stat-node" data-stat="pct-sum-moe">--</div>
+          </calcite-card>
+        
+        </calcite-panel>
+      
+      
+      </calcite-shell-panel>
+      
+      <!-- NOTICES ADN ALERTS -->
+      <calcite-alert id="app-notice" icon="" scale="m" placement="top" auto-dismiss="false" color="red">
+        <div slot="title"></div>
+        <div slot="message"></div>
+      </calcite-alert>
+    
+    </calcite-shell>
+    
+    <!-- LOADER -->
+    <calcite-loader id="app-loader" active="true" type="indeterminate" scale="l"></calcite-loader>
+    
+    <!-- APP DETAILS MODAL -->
+    <calcite-modal id="app-details-modal" color="blue" background-color="grey" scale="m" width="m" role="dialog" aria-labelledby="app-modal-title">
+      <h3 slot="header" id="app-modal-title" class="application-title"></h3>
+      <div slot="content" class="application-description"></div>
+      <div slot="secondary" class="margin-m">
+        <calcite-label layout="inline">
+          <span>hide on startup</span>
+          <calcite-checkbox id="hide-startup-checkbox"></calcite-checkbox>
+        </calcite-label>
+      </div>
+      <calcite-button id="app-details-ok-btn" slot="primary" width="full" hidden>OK</calcite-button>
+    </calcite-modal>
+    
+    <!-- LAYER TILE TEMPLATE -->
+    <template id="acs-layer-tile-template">
+      <calcite-tile-select
+        heading=""
+        description=""
+        value=""
+        icon="layer-points"
+        input-alignment="end"
+        input-enabled=""
+        name="acs-layer"
+        type="radio"
+        width="full">
+      </calcite-tile-select>
+    </template>
+    
+    <!-- FIELD TILE TEMPLATE -->
+    <template id="acs-field-tile-template">
+      <calcite-tile-select
+        description=""
+        heading=""
+        value=""
+        icon="form-elements"
+        input-alignment="end"
+        input-enabled=""
+        name="acs-field"
+        type="radio"
+        width="full">
+      </calcite-tile-select>
+    </template>
+  
+  </body>
+</html>

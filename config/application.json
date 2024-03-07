@@ -1,0 +1,19 @@
+{
+  "title": "",
+  "description": "",
+  "portalUrl": "https://www.arcgis.com",
+  "oauthappid": null,
+  "apiKey": null,
+  "group": "16b3a5ac36834ed6b3f16261d9a988ea",
+  "webmap": "6d4bdfcc8a0e4f83b4fa8a228051323f",
+  "webscene": "",
+  "container": "view-container",
+  "initialLayerTitle": "ACS Population and Housing Basics - Centroids",
+  "shareable": [
+    "initialLayerTitle",
+    "initialFieldName",
+    "center",
+    "zoom",
+    "_test"
+  ]
+}

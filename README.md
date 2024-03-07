@@ -1,10 +1,11 @@
-# Application Template
-Simple application template that uses the ArcGIS API for JavaScript and Calcite Components.
+# ACS Summary Statistics with Margin of Error
 
+This app helps people aggregate estimates from the most current release of the U.S. Census Bureau's American Community Survey (ACS) 5-year data by summing up tracts. Survey estimates contain error due to sampling, and the margins of error are worth reporting when exploring ACS data. Aggregating tracts together can help resolve concerns about the reliability of the estimates.
+
+
+#### Application built with:
  - [ArcGIS API for Javascript](https://developers.arcgis.com/javascript/latest/api-reference/)
  - [Calcite Components](https://developers.arcgis.com/calcite-design-system/components/)
-
-*WARNING*: this is a new and evolving effort... things might not work as expected.
 
 
 #### For questions about the demo web application:
